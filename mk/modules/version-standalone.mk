@@ -6,6 +6,12 @@
 
 DEPS += git sed
 
+# Labeling
+LB_GIT_PUSH_ASK = Do you want push branch and tag
+LB_GIT_SEND_REPO = Send git modification to repository
+LB_GIT_SEND_COMMITS = Send commits
+LB_GIT_SEND_TAGS = Send tags
+
 BUMP_TYPE ?= patch
 PRE_ID    ?= $(if $(VERSION_PRE_ID), $(VERSION_PRE_ID), alpha)
 
@@ -139,11 +145,11 @@ endif
 	@git commit -m "$(VERSION)" $(SHELL_DEBUG)
 	@git tag $(VERSION) $(SHELL_DEBUG)
 	
-	@if make .prompt-yesno MSG="Do you want push branch and tag" 2> /dev/null; then \
-		make _print_task MSG="Send git modification to repository"; \
-		make _print_subtask MSG="Send commits"; \
+	@if $(MAKE) .prompt-yesno MSG="$(LB_GIT_PUSH_ASK)" 2> /dev/null; then \
+		$(MAKE) _print_task MSG="$(LB_GIT_SEND_REPO)"; \
+		$(MAKE) _print_subtask MSG="$(LB_GIT_SEND_COMMITS)"; \
 		git push $(SHELL_DEBUG); \
-		make _print_subtask MSG="Send tags"; \
+		$(MAKE) _print_subtask MSG="$(LB_GIT_SEND_TAGS)"; \
 		git push --tags $(SHELL_DEBUG); \
 	fi
 endif
