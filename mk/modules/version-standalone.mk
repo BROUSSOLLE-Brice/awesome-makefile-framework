@@ -133,7 +133,7 @@ endif
 	$(call GET_VERSION)
 	$(call _PRINT_SUBTASK,new version is $(_BOLD)$(_GREEN)$(VERSION) $(_END))
 	
-	# TODO: Try to find a method to prioritize hooks
+# TODO: Try to find a method to prioritize hooks
 	$(foreach fn,$(GIT_PRE_RELEASE_HOOK),$(call $(fn),$(PREVIOUS_VERSION),$(VERSION)))
 
 	$(call _PRINT_TASK,Apply new version into files)

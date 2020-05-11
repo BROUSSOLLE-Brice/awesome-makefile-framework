@@ -1,5 +1,6 @@
 include ./mk/modules/version-standalone.mk \
         ./mk/modules/splash.mk \
+        ./mk/modules/gh-release.mk \
         ./mk/main.mk 
 
 APP_NAME = awsome-makefile-framework
@@ -7,7 +8,7 @@ VERSION_MAJOR = 0
 VERSION_MINOR = 0
 VERSION_PATCH = 1
 VERSION_PRE_ID = alpha
-VERSION_PRE_NB = 1
+VERSION_PRE_NB = 4
 
 _TITLE := \
 H4sIAHJYqF4AA3WQSQ7AIAhF956CuOnGhC3H8ABNHO5/iH4Uh6b2G8wTQRARVS1EJF90IjiRl6q+L9p9kDicb8R9g\
@@ -54,6 +55,14 @@ GIT_PRE_BUMP_HOOK += _pre_bump
 define _pre_bump
 	$(call _PRINT_TASK,Replace version information $(1) to $(2))
 	$(foreach file,$(PRE_RELEASE_FILES_MODIFICATION),$(call _replace_in_file,$(1),$(2),$(file))${\n})
+endef
+
+GIT_POST_RELEASE_HOOK += _post_release
+define _post_release
+	@$(MAKE) gh-release \
+		GH_USER=BROUSSOLLE-Brice \
+		GH_TOKEN_FILE=.token \
+		GH_ASSETS="./dist/awsome-makefile-framework-v$(1).tar.gz ./templates/installer"
 endef
 
 define _replace_in_file
