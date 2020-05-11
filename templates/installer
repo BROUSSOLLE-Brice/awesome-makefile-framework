@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+TITLE="\
+H4sIAHJYqF4AA3WQSQ7AIAhF956CuOnGhC3H8ABNHO5/iH4Uh6b2G8wTQRARVS1EJF90IjiRl6q+L9p9kDicb8R9g\
+SRe6jzhScmkbBXyKjuxwYheScOwsWWX1dTCnt7iKHMygN3KnFwfQvRzHoazCUYUTN/gsazu+WObUCQgub+w2a8eCS\
+Z3B6kBAAA="
+APP_NAME="awsome-makefile-framework"
+APP_VERSION="0.0.1-alpha.1"
+RELEASE_URL="https://github.com/BROUSSOLLE-Brice/${APP_NAME}/releases/download/v${APP_VERSION}"
+PACKAGE="${RELEASE_URL}/${APP_NAME}-v${APP_VERSION}.tar.gz"
+echo -e "\n`echo ${TITLE} | base64 -d | zcat`\n"
+echo "Installer for ${APP_NAME} v${APP_VERSION}"
+echo "   » Clear previous install."
+rm -rf ./mk
+echo "   » Download package."
+curl -s -L -o "./${APP_NAME}.tar.gz" ${PACKAGE}
+echo "   » Uncompress package."
+tar -xzf "./${APP_NAME}.tar.gz" 
+echo "   » Clean install files."
+rm "./${APP_NAME}.tar.gz"
+echo -e "\nThank you for installing ${APP_NAME}.\nHope you enjoy it."

@@ -1,0 +1,32 @@
+## TEMPLATE FOR YOUR MAKEFILE APPLICATION
+#########################################
+
+## IN CASE OF "VERSION-STANDALONE" MODULE ACTIVATION
+# include mk/modules/version-standalone.mk
+# APP_NAME = <YOUR_APP_NAME>
+# VERSION_MAJOR = 0
+# VERSION_MINOR = 0
+# VERSION_PATCH = 0
+# VERSION_PRE_ID = 
+# VERSION_PRE_NB = 0
+## END "VERSION-STANDALONE" MODULE
+
+## IN CASE OF "SPLASH" MODULE ACTIVATION
+# include mk/modules/splash.mk 
+# _TITLE := \
+# H4sIAHJYqF4AA3WQSQ7AIAhF956CuOnGhC3H8ABNHO5/iH4Uh6b2G8wTQRARVS1EJF90IjiRl6q+L9p9kDicb8R9g\
+# SRe6jzhScmkbBXyKjuxwYheScOwsWWX1dTCnt7iKHMygN3KnFwfQvRzHoazCUYUTN/gsazu+WObUCQgub+w2a8eCS\
+# Z3B6kBAAA=
+## END "SPLASH" MODULE
+
+## THE MAIN INCLUDE MUST BE THE LAST INCLUDE FOR THE FRAMEWORK
+include mk/main.mk
+
+# PUBLIC TASKS
+###############
+PHONY += test
+test: .init
+	@echo $(TOTO)
+
+# PRIVATE TASKS
+################
