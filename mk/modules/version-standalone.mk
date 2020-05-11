@@ -129,10 +129,13 @@ ifeq ($(BUMP_TYPE), release)
 	$(call _PRINT_SUBTASK,Finalize the release)
 	$(call CLEAN_PRE)
 endif
-
+	$(eval PREVIOUS_VERSION=$(VERSION))
 	$(call GET_VERSION)
 	$(call _PRINT_SUBTASK,new version is $(_BOLD)$(_GREEN)$(VERSION) $(_END))
 	
+	# TODO: Try to find a method to prioritize hooks
+	$(foreach fn,$(GIT_PRE_RELEASE_HOOK),$(call $(fn),$(PREVIOUS_VERSION),$(VERSION)))
+
 	$(call _PRINT_TASK,Apply new version into files)
 	@sed -i.bak -E 's@^VERSION_PATCH =.+@VERSION_PATCH = $(VERSION_PATCH)@g' ./Makefile
 	@sed -i.bak -E 's@^VERSION_MINOR =.+@VERSION_MINOR = $(VERSION_MINOR)@g' ./Makefile
@@ -140,10 +143,16 @@ endif
 	@sed -i.bak -E 's@^VERSION_PRE_ID =.+@VERSION_PRE_ID = $(VERSION_PRE_ID)@g' ./Makefile
 	@sed -i.bak -E 's@^VERSION_PRE_NB =.+@VERSION_PRE_NB = $(VERSION_PRE_NB)@g' ./Makefile
 
+# TODO: Try to find a method to prioritize hooks
+	$(foreach fn,$(GIT_PRE_BUMP_HOOK),$(call $(fn),$(PREVIOUS_VERSION),$(VERSION)))
+
 	$(call _PRINT_TASK,Apply new version into git)
-	@git add Makefile $(SHELL_DEBUG)
-	@git commit -m "$(VERSION)" $(SHELL_DEBUG)
-	@git tag $(VERSION) $(SHELL_DEBUG)
+	@git add . $(SHELL_DEBUG)
+	@git commit -m "v$(VERSION)" $(SHELL_DEBUG)
+	@git tag v$(VERSION) $(SHELL_DEBUG)
+
+# TODO: Try to find a method to prioritize hooks
+	$(foreach fn,$(GIT_POST_BUMP_HOOK),$(call $(fn),$(VERSION)))
 	
 	@if $(MAKE) .prompt-yesno MSG="$(LB_GIT_PUSH_ASK)" 2> /dev/null; then \
 		$(MAKE) _print_task MSG="$(LB_GIT_SEND_REPO)"; \
@@ -152,4 +161,7 @@ endif
 		$(MAKE) _print_subtask MSG="$(LB_GIT_SEND_TAGS)"; \
 		git push --tags $(SHELL_DEBUG); \
 	fi
+	
+# TODO: Try to find a method to prioritize hooks
+	$(foreach fn,$(GIT_POST_RELEASE_HOOK),$(call $(fn),$(VERSION)))
 endif
