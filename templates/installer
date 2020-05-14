@@ -4,7 +4,7 @@ H4sIAHJYqF4AA3WQSQ7AIAhF956CuOnGhC3H8ABNHO5/iH4Uh6b2G8wTQRARVS1EJF90IjiRl6q+L9p9
 SRe6jzhScmkbBXyKjuxwYheScOwsWWX1dTCnt7iKHMygN3KnFwfQvRzHoazCUYUTN/gsazu+WObUCQgub+w2a8eCS\
 Z3B6kBAAA="
 APP_NAME="awsome-makefile-framework"
-APP_VERSION="0.0.1-alpha.4"
+APP_VERSION="0.0.1-beta.1"
 RELEASE_URL="https://github.com/BROUSSOLLE-Brice/${APP_NAME}/releases/download/v${APP_VERSION}"
 PACKAGE="${RELEASE_URL}/${APP_NAME}-v${APP_VERSION}.tar.gz"
 echo -e "\n`echo ${TITLE} | base64 -d | zcat`\n"

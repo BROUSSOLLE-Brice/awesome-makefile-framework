@@ -7,8 +7,8 @@ APP_NAME = awsome-makefile-framework
 VERSION_MAJOR = 0
 VERSION_MINOR = 0
 VERSION_PATCH = 1
-VERSION_PRE_ID = alpha
-VERSION_PRE_NB = 4
+VERSION_PRE_ID = beta
+VERSION_PRE_NB = 1
 
 _TITLE := \
 H4sIAHJYqF4AA3WQSQ7AIAhF956CuOnGhC3H8ABNHO5/iH4Uh6b2G8wTQRARVS1EJF90IjiRl6q+L9p9kDicb8R9g\
@@ -28,6 +28,17 @@ release: .init 			##@Publishing Create the release package
 	@echo
 	@echo "The $(_BOLD)release$(_END) rule create the final package of the release."
 	@echo
+	@echo "${_WHITE}Mandatories:${_END}"
+	$(call _PRINT_OPTION,GH_USER,,Github User)
+	$(call _PRINT_OPTION,GH_TOKEN_FILE,,File path to Github token file)
+	@echo
+	@echo "${_WHITE}Options:${_END}"
+	$(call _PRINT_OPTION,GH_DRAFT,$(GH_DRAFT),Set the release as draft)
+	@echo
+	@echo "${_WHITE}Example:${_END}"
+	@echo "  make release GH_USER=... GH_TOKEN_FILE=..."
+	@echo "  make release GH_USER=... GH_TOKEN_FILE=... GH_DRAFT=true"
+	@echo 
 else
 release: .init
 	$(call _PRINT_CMD,Create the release package)
@@ -60,8 +71,9 @@ endef
 GIT_POST_RELEASE_HOOK += _post_release
 define _post_release
 	@$(MAKE) gh-release \
-		GH_USER=BROUSSOLLE-Brice \
-		GH_TOKEN_FILE=.token \
+		GH_USER=$(GH_USER) \
+		GH_TOKEN_FILE=$(GH_TOKEN_FILE) \
+		GH_DRAFT=$(GH_DRAFT) \
 		GH_ASSETS="./dist/awsome-makefile-framework-v$(1).tar.gz ./templates/installer"
 endef
 
