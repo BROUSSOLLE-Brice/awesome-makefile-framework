@@ -38,10 +38,10 @@ define GET_VERSION
 endef
 
 PHONY += version 
-version: .init         ##@Xtra Display application version.
+version: .init        ##@Xtra Display application version.
 PHONY += bump 
 ifeq ($(HELP),true)
-bump: .init           ##@Publishing Bump application version.
+bump: .init          	##@Publishing Bump application version.
 	@echo "Usage: make bump BUMP_TYPE=... [PRE_ID=...]"
 	@echo
 	@echo "The $(_BOLD)bump$(_END) rule update the version number following the semver specification."

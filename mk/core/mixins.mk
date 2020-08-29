@@ -27,6 +27,9 @@ repeat_word_length = \
 	$(shell perl -E "print '$(1)' \
 		x $(shell echo "$(2)" | awk '{print length}')")
 
+# https://stackoverflow.com/questions/16144115/makefile-remove-duplicate-words-without-sorting
+uniq = $(if $1,$(firstword $1) $(call uniq,$(filter-out $(firstword $1),$1)))
+
 # Check if current user is root
 .as-root:
 ifneq ($(_CURRENT_USER), root)

@@ -8,7 +8,7 @@ VERSION_MAJOR = 0
 VERSION_MINOR = 0
 VERSION_PATCH = 1
 VERSION_PRE_ID = beta
-VERSION_PRE_NB = 1
+VERSION_PRE_NB = 5
 
 _TITLE := \
 H4sIAHJYqF4AA3WQSQ7AIAhF956CuOnGhC3H8ABNHO5/iH4Uh6b2G8wTQRARVS1EJF90IjiRl6q+L9p9kDicb8R9g\
@@ -16,7 +16,7 @@ SRe6jzhScmkbBXyKjuxwYheScOwsWWX1dTCnt7iKHMygN3KnFwfQvRzHoazCUYUTN/gsazu+WObUCQgu
 Z3B6kBAAA=
 
 DIST_FOLDER = ./dist
-PRE_RELEASE_FILES_MODIFICATION= ./README.md ./templates/installer
+PRE_RELEASE_FILES_MODIFICATION= ./README.md ./templates/installer ./mk/vars.mk
 
 # PUBLIC TASKS
 ###############
@@ -55,6 +55,9 @@ define _release_package
 	@mkdir -p $(DIST_FOLDER)/$(APP_NAME)-v$(VERSION)
 	$(call _PRINT_SUBTASK,Copy sources)
 	@cp -R ./mk $(DIST_FOLDER)/$(APP_NAME)-v$(VERSION)/mk
+	$(call _PRINT_TASK,Clean package)
+	@rm -rf $(DIST_FOLDER)/$(APP_NAME)-v$(VERSION)/mk/**/*.bak 
+	@rm -rf $(DIST_FOLDER)/$(APP_NAME)-v$(VERSION)/mk/.cache/*
 	$(call _PRINT_TASK,Compress release)
 	@cd $(DIST_FOLDER)/$(APP_NAME)-v$(VERSION) && tar -czf ../$(APP_NAME)-v$(VERSION).tar.gz . 
 	$(call _PRINT_TASK,Clean '$(DIST_FOLDER)' folder)

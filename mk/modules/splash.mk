@@ -15,6 +15,7 @@ _OS_BASE64_DECODE_ARG := $(if $(filter-out darwin, $(UNAME_S)), "-D", "-d")
 # a new variable _TITLE with the result as value.
 _TITLE := H4sIACXLpV4AAwvJV0hKVUhJTcvMS03h4gIA7syxMQ8AAAA=
 
+ifeq ($(QUIET),) 
 INIT += _SPLASH
 define _SPLASH
 	@echo
@@ -24,3 +25,4 @@ define _SPLASH
 	@echo "│ App ${_IGREY} ${_BOLD}${_RED}${APP_NAME} ${_END} │ Version ${_BOLD}${_GREEN}${VERSION}${_END} │"
 	@echo "└──────$(call repeat_word_length,─,$(APP_NAME))──┴─────────$(call repeat_word_length,─,$(VERSION))─┘"
 endef
+endif

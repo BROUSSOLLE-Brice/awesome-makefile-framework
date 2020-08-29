@@ -13,11 +13,12 @@ endef
 # To append your function to the init phase use "INIT += FUNC_NAME".
 # To append your dependencies use "DEPS += dep_name".
 .init:
+	$(eval DEPS=$(sort $(call uniq,$(DEPS))))
 	$(foreach dep,$(DEPS),$(if $(shell which $(dep)),, $(call _PRINT_ERROR,Dependenci '$(dep)' is missing.) ))
 	$(foreach fn,$(INIT),$(call $(fn)))
 
-PHONY += make-dep
-amf-deps: .init
+PHONY += amf-deps
+amf-deps: .init			#!@Dependencies List of dependencies
 	$(call _PRINT_CMD, List of BBR-AMF dependecies)
 	$(foreach dep,$(DEPS),$(call _PRINT_DEP,$(dep))${\n})
 

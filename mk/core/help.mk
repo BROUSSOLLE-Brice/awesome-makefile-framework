@@ -9,6 +9,7 @@ LB_HELP_RULE            := Rule
 LB_HELP_OPTIONS         := Options
 LB_HELP_PRINT_HELP_RULE := Print help for a specific rule.
 LB_HELP_DISPLAY_DEBUG   := Display informations for debugging purpose.
+LB_HELP_DISPLAY_QUIET   := Toggle to quiet mode with less element to prompt.
 LB_DEFAULT_SELECT_RULE  := Please select a rule.
 
 # Define the default goal to the main help
@@ -32,6 +33,18 @@ HELP_FUN = \
 	}; \
 	print "\n"; }
 
+HELP_AMF_FUN = \
+	%help; \
+	while(<>) { push @{$$help{$$2 // 'options'}}, [$$1, $$3] if /^([a-zA-Z\-]+)\s*:.*\#\!(?:@([a-zA-Z\-]+))?\s(.*)$$/ }; \
+	print "Usage: make [$(LB_HELP_RULE)] [$(LB_HELP_OPTIONS)]\n\n"; \
+	for (sort keys %help) { \
+	print "${_WHITE}$$_:${_END}\n"; \
+	for (@{$$help{$$_}}) { \
+	$$sep = " " x (32 - length $$_->[0]); \
+	print "  ${_YELLOW}$$_->[0]${_END}$$sep${_GREEN}$$_->[1]${_END}\n"; \
+	}; \
+	print "\n"; }
+
 # Function to generate options to display into global and rules help display.
 OPTION_FUN = \
 	$$sep1 = " " x (18 - length "$(1)"); \
@@ -44,6 +57,14 @@ define _PRINT_OPTION
 	@perl -e '$(OPTION_FUN)'
 endef
 
+define _OPT_DISPLAY
+	@echo "$(LB_HELP_OPTIONS):"
+	$(call _PRINT_OPTION,HELP,false,$(LB_HELP_PRINT_HELP_RULE))
+	$(call _PRINT_OPTION,DEBUG,false,$(LB_HELP_DISPLAY_DEBUG))
+	$(call _PRINT_OPTION,QUIET,false,$(LB_HELP_DISPLAY_QUIET))
+	@echo 
+endef
+
 # Global help
 # It generated from rules comments. For a rule to be displayed into the global help page 
 # it necessary to add comment at the end of rule title line with tow hash '##' continue
@@ -51,10 +72,11 @@ endef
 PHONY += help
 help: .init                ##@Xtra Display this help
 	@perl -e '$(HELP_FUN)' $(MAKEFILE_LIST)
-	@echo "$(LB_HELP_OPTIONS):"
-	$(call _PRINT_OPTION,HELP,false,$(LB_HELP_PRINT_HELP_RULE))
-	$(call _PRINT_OPTION,DEBUG,false,$(LB_HELP_DISPLAY_DEBUG))
-	@echo 
+	$(call _OPT_DISPLAY)
+
+amf: .init					##@Xtra Display specific AMF help
+	@perl -e '$(HELP_AMF_FUN)' $(MAKEFILE_LIST)
+	$(call _OPT_DISPLAY)
 
 # Default rule
 # It permit to display the global help page if no rules was defined.

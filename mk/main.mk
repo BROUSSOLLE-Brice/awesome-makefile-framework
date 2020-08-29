@@ -10,5 +10,6 @@ include mk/vars.mk \
 		mk/core/colors.mk \
 		mk/core/printing.mk \
 		mk/core/help.mk \
+		mk/core/updates.mk \
 		mk/core/core.mk
 
