@@ -1,7 +1,7 @@
 include ./mk/modules/version-standalone.mk \
-        ./mk/modules/splash.mk \
-        ./mk/modules/gh-release.mk \
-        ./mk/main.mk 
+		./mk/modules/splash.mk \
+		./mk/modules/gh-release.mk \
+		./mk/main.mk 
 
 APP_NAME = awsome-makefile-framework
 VERSION_MAJOR = 0
@@ -23,7 +23,7 @@ PRE_RELEASE_FILES_MODIFICATION= ./README.md ./templates/installer
 
 PHONY += release
 ifeq ($(HELP),true)
-release: .init 			##@Publishing Create the release package
+release: .init       ##@Publishing Create the release package
 	@echo "Usage: make release"
 	@echo
 	@echo "The $(_BOLD)release$(_END) rule create the final package of the release."

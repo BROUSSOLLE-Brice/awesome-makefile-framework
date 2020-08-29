@@ -6,9 +6,9 @@
 
 # Include core elements
 include mk/vars.mk \
-        mk/core/mixins.mk \
-				mk/core/colors.mk \
-				mk/core/printing.mk \
-				mk/core/help.mk \
-				mk/core/core.mk
+		mk/core/mixins.mk \
+		mk/core/colors.mk \
+		mk/core/printing.mk \
+		mk/core/help.mk \
+		mk/core/core.mk
 

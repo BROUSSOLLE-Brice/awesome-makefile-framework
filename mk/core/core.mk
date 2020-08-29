@@ -17,7 +17,7 @@ endef
 	$(foreach fn,$(INIT),$(call $(fn)))
 
 PHONY += make-dep
-amf-deps: .init 	
+amf-deps: .init
 	$(call _PRINT_CMD, List of BBR-AMF dependecies)
 	$(foreach dep,$(DEPS),$(call _PRINT_DEP,$(dep))${\n})
 

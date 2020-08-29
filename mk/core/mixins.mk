@@ -16,16 +16,16 @@ _CURRENT_USER := $(shell whoami)
 #   1. Variable name(s) to test.
 #   2. (optional) Error message to print.
 check_defined = \
-    $(strip $(foreach 1,$1, \
-			$(call __check_defined,$1,$(strip $(value 2)))))
+	$(strip $(foreach 1,$1, \
+		$(call __check_defined,$1,$(strip $(value 2)))))
 __check_defined = \
-    $(if $(value $1),, \
-      $(call _PRINT_ERROR,$(shell printf "$(LB_MIXINS_CHECK_IS_MISSING)" "$1" )$(if $2, ($2)).))
+	$(if $(value $1),, \
+		$(call _PRINT_ERROR,$(shell printf "$(LB_MIXINS_CHECK_IS_MISSING)" "$1" )$(if $2, ($2)).))
 
 # Repeat a character depending of word length
 repeat_word_length = \
-		$(shell perl -E "print '$(1)' \
-			x $(shell echo "$(2)" | awk '{print length}')")
+	$(shell perl -E "print '$(1)' \
+		x $(shell echo "$(2)" | awk '{print length}')")
 
 # Check if current user is root
 .as-root:
