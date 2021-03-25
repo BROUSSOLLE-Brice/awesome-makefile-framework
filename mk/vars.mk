@@ -20,6 +20,9 @@ endef
 # another variable.
 COMMA = ,
 
+SPACE:=
+SPACE+=
+
 AMF_VERSION				= "v0.0.1-beta.5"
 AMF_REPOSITORY 			= "BROUSSOLLE-Brice/awsome-makefile-framework"
 AMF_VERSION_EARLY_MODE 	= false
