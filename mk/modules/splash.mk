@@ -26,3 +26,29 @@ define _SPLASH
 	@echo "└──────$(call repeat_word_length,─,$(APP_NAME))──┴─────────$(call repeat_word_length,─,$(VERSION))─┘"
 endef
 endif
+
+feq ($(HELP),true)
+splash-generator: .init  	#!@Splash Generate spash encoded 
+	@echo "Usage: make splash-generator BANNER_FILE=..."
+	@echo
+	@echo "The $(_BOLD)splash-generator$(_END) rule generate the encoded banner."
+	@echo
+	@echo "${_WHITE}Mandatories:${_END}"
+	$(call _PRINT_OPTION,BANNER_FILE,,File to convert)
+	@echo
+	@echo "${_WHITE}Example:${_END}"
+	@echo "  make splash-generator BANNER_FILE=... "
+	@echo 
+else
+BANNER_FILE?=
+splash-generator: .init
+	$(call _PRINT_CMD,Generate encoded banner)
+	@if [ -z "$(BANNER_FILE)" ]; then make \
+		_print_error MSG="BANNER_FILE '$(BANNER_FILE)' is not valid."; fi
+ifneq ("$(wildcard $(BANNER_FILE))","")
+	@echo
+	@cat $(BANNER_FILE) | gzip | base64 
+else 
+	$(call _PRINT_ERROR,BANNER_FILE '$(BANNER_FILE)' not exist.)
+endif
+endif
