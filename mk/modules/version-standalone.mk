@@ -39,6 +39,10 @@ endef
 
 PHONY += version 
 version: .init        ##@Xtra Display application version.
+ifeq ($(QUIET),true)
+	@echo ${VERSION}
+endif
+
 PHONY += bump 
 ifeq ($(HELP),true)
 bump: .init          	##@Publishing Bump application version.
