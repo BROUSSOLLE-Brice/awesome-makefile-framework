@@ -18,6 +18,7 @@ _TITLE := H4sIACXLpV4AAwvJV0hKVUhJTcvMS03h4gIA7syxMQ8AAAA=
 ifeq ($(QUIET),) 
 INIT += _SPLASH
 define _SPLASH
+	$(eval _TITLE = $(subst $(SPACE),,$(_TITLE)))
 	@echo
 	@echo "${_TITLE}" | base64 $(_OS_BASE64_DECODE_ARG) | zcat
 	@echo 
