@@ -1,14 +1,6 @@
 # CORE
 #######
 
-# New line hack for makefile function 'foreach'
-# Answer from "bobbogo"
-# https://stackoverflow.com/a/12529036
-define \n
-
-
-endef
-
 # Init rule must be included on all public rules.
 # To append your function to the init phase use "INIT += FUNC_NAME".
 # To append your dependencies use "DEPS += dep_name".
