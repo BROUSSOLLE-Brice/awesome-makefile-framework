@@ -28,7 +28,7 @@ define _SPLASH
 endef
 endif
 
-feq ($(HELP),true)
+ifeq ($(HELP),true)
 splash-generator: .init  	#!@Splash Generate spash encoded 
 	@echo "Usage: make splash-generator BANNER_FILE=..."
 	@echo

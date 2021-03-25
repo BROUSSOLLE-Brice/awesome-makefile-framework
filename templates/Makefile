@@ -25,8 +25,30 @@ include mk/main.mk
 # PUBLIC TASKS
 ###############
 PHONY += test
-test: .init
-	@echo $(TOTO)
+ifeq ($(HELP),true)
+test: .init		##@MyApp Test my app
+	@echo "Usage: make test MANDAT=... [options]"
+	@echo
+	@echo "The $(_BOLD)test$(_END) rule is an example to create a rule with help"
+	@echo
+	@echo "${_WHITE}Mandatories:${_END}"
+	$(call _PRINT_OPTION,MANDAT,,Mandatories field 1)
+	@echo
+	@echo "${_WHITE}Options:${_END}"
+	$(call _PRINT_OPTION,OPT,Default,Optionnal element with default value)
+	@echo
+	@echo "${_WHITE}Example:${_END}"
+	@echo "  make gh-test MANDAT=..."
+	@echo "  make gh-test MANDAT=... OPT=..."
+	@echo 
+else
+MANDAT?=
+OPT=default
+test: .init		
+	$(call _PRINT_CMD,Command title)
+	$(call _PRINT_TASK,Task title)
+	@echo 'test: $(MANDAT) $(OPT)'
+endif
 
 # PRIVATE TASKS
 ################
