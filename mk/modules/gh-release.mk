@@ -17,8 +17,9 @@ GH_ASSETS :=
 GH_PROJECT ?= $(APP_NAME)
 GH_DRAFT   ?= false
 
+PHONY += gh-release
 ifeq ($(HELP),true)
-gh-release: .init
+gh-release: .init 		#!@Modules GitHub release creation 
 	@echo "Usage: make gh-release GH_USER=... GH_TOKEN_FILE=... [options]"
 	@echo
 	@echo "The $(_BOLD)gh-release$(_END) rule create a release on Github with assets."

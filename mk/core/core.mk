@@ -10,9 +10,13 @@
 	$(foreach fn,$(INIT),$(call $(fn)))
 
 PHONY += amf-deps
-amf-deps: .init			#!@Dependencies List of dependencies
+amf-deps: .init			#!@Core List of dependencies
+ifeq ($(QUIET),) 
 	$(call _PRINT_CMD, List of BBR-AMF dependecies)
 	$(foreach dep,$(DEPS),$(call _PRINT_DEP,$(dep))${\n})
+else
+	$(foreach dep,$(DEPS),@echo $(dep)${\n})
+endif
 
 # Print dependency line for \n function hack for foreach makefile function
 define _PRINT_DEP

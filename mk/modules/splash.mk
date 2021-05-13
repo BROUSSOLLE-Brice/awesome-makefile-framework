@@ -28,8 +28,9 @@ define _SPLASH
 endef
 endif
 
+PHONY += splash-generator
 ifeq ($(HELP),true)
-splash-generator: .init  	#!@Splash Generate spash encoded 
+splash-generator: .init  	#!@Modules Generate spash encoded 
 	@echo "Usage: make splash-generator BANNER_FILE=..."
 	@echo
 	@echo "The $(_BOLD)splash-generator$(_END) rule generate the encoded banner."

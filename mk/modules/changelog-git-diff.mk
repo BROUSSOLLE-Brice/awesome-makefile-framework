@@ -11,9 +11,21 @@ GIT_PRE_BUMP_HOOK += _CHANGELOG_CREATE_RELEASE
 
 CHANGELOG_URL = https://github.com/BROUSSOLLE-Brice/awsome-makefile-framework
 
-# PHONY =+ test-changelog
-# test-changelog: .init
-# 	$(call _CHANGELOG_CREATE_RELEASE)
+PHONY += changelog-test
+ifeq ($(HELP),true)
+changelog-test: .init 		#!@Modules Changelog generator test
+	@echo "Usage: make changelog-test"
+	@echo
+	@echo "The $(_BOLD)changelog-test$(_END) rule generate CHANGELOG.md file modification."
+	@echo "All lines are from Git Commits messages."
+	@echo
+	@echo "${_WHITE}Example:${_END}"
+	@echo "  make changelog-test"
+	@echo
+else
+changelog-test: .init
+ 	$(call _CHANGELOG_CREATE_RELEASE)
+endif
 
 define _CHANGELOG_CREATE_RELEASE
 	$(call _PRINT_TASK,Generate Changelog modification from git diff)
