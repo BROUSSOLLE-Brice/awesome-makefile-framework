@@ -9,7 +9,7 @@ Framework for makefile based projects
 curl -sL https://github.com/BROUSSOLLE-Brice/awsome-makefile-framework/releases/download/latest/installer | sh
 
 # Specific version
-curl -sL https://github.com/BROUSSOLLE-Brice/awsome-makefile-framework/releases/download/v0.0.1-beta.9/installer | sh
+curl -sL https://github.com/BROUSSOLLE-Brice/awsome-makefile-framework/releases/download/v0.1.0/installer | sh
 ```
 
 ## Create first makefile
@@ -19,7 +19,7 @@ curl -sL https://github.com/BROUSSOLLE-Brice/awsome-makefile-framework/releases/
 curl -sLo Makefile https://raw.githubusercontent.com/BROUSSOLLE-Brice/awsome-makefile-framework/master/templates/Makefile
 
 # Get specific version Makefile template
-curl -sLo Makefile https://raw.githubusercontent.com/BROUSSOLLE-Brice/awsome-makefile-framework/v0.0.1-beta.9/templates/Makefile
+curl -sLo Makefile https://raw.githubusercontent.com/BROUSSOLLE-Brice/awsome-makefile-framework/v0.1.0/templates/Makefile
 ```
 
 ## Configure project
