@@ -3,7 +3,8 @@
 # Group of global functions.
 
 # Labeling
-LB_MIXINS_CHECK_IS_MISSING := %s is missing.
+LB_MIXINS_CHECK_IS_MISSING := Undefined %s
+LB_MIXINS_CHECK_IS_MISSING_TARGET := required by target
 LB_MIXINS_ERROR_ROOT_USER := This command must be runned as root user or with sudo command.
 
 # Register current shell user
@@ -20,7 +21,7 @@ check_defined = \
 		$(call __check_defined,$1,$(strip $(value 2)))))
 __check_defined = \
 	$(if $(value $1),, \
-		$(call _PRINT_ERROR,$(shell printf "$(LB_MIXINS_CHECK_IS_MISSING)" "$1" )$(if $2, ($2)).))
+		$(call _PRINT_ERROR,$(shell printf "$(LB_MIXINS_CHECK_IS_MISSING)" "$1" )$(if $2, ($2))$(if $(value @), $(LB_MIXINS_CHECK_IS_MISSING_TARGET) '$@')))
 
 # Repeat a character depending of word length
 repeat_word_length = \
