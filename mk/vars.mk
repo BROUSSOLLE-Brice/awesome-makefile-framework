@@ -23,7 +23,7 @@ COMMA = ,
 SPACE:=
 SPACE+=
 
-AMF_VERSION				      = "v0.1.0"
+AMF_VERSION				      = "v0.1.1"
 AMF_REPOSITORY 			    = "BROUSSOLLE-Brice/awsome-makefile-framework"
 AMF_VERSION_EARLY_MODE 	= false
 PROJECT_DIR             = $(dir $(abspath $(lastword $(MAKEFILE_LIST) ~ '..')))

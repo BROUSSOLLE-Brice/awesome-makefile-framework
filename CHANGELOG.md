@@ -19,6 +19,24 @@ et le projet suit les pratiques [Semantic Versioning](https://semver.org/spec/v2
 
 ### Security
 
+## [0.1.1] - 2024-06-19
+
+### Commit comments
+
+- Fix mixin check-defined
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
 ## [0.1.0] - 2021-05-13
 
 ### Commit comments
@@ -53,5 +71,7 @@ et le projet suit les pratiques [Semantic Versioning](https://semver.org/spec/v2
 ### Security
 
 
-[Unreleased]: https://github.com/BROUSSOLLE-Brice/awsome-makefile-frameworkcompare/v0.1.0...master
+
+[Unreleased]: https://github.com/BROUSSOLLE-Brice/awsome-makefile-frameworkcompare/v0.1.1...master
+[0.1.1]: https://github.com/BROUSSOLLE-Brice/awsome-makefile-frameworkcompare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/BROUSSOLLE-Brice/awsome-makefile-frameworkcompare/v0.0.0...v0.1.0

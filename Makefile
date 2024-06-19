@@ -7,7 +7,7 @@ include ./mk/modules/version-standalone.mk \
 APP_NAME = awsome-makefile-framework
 VERSION_MAJOR = 0
 VERSION_MINOR = 1
-VERSION_PATCH = 0
+VERSION_PATCH = 1
 VERSION_PRE_ID = 
 VERSION_PRE_NB = 0
 
